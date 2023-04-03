@@ -6,7 +6,7 @@ module.exports = {
   entry: './src/app.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'app.js',
+    filename: '[name].js',
   },
   target: 'node',
   module: {
@@ -22,6 +22,19 @@ module.exports = {
         },
       },
     ],
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 0,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
   },
   plugins: [
     new CopyWebpackPlugin({

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A RestFul API project using Node.js, Express, TypeORM, JWT, Socket.io, Webpack5, MySQL5.7, and Redis.",
   "main": "src/app.js",
+  "sideEffects": false,
   "scripts": {
     "lint": "eslint src/**/*.js",
     "start": "cross-env NODE_ENV=production node src/app.js",
@@ -10,18 +11,6 @@
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "test": "cross-env NODE_ENV=development mocha --require @babel/register --recursive './src/tests/**/*.test.js'"
   },
-  "keywords": [
-    "restful",
-    "api",
-    "nodejs",
-    "express",
-    "typeorm",
-    "jwt",
-    "socket.io",
-    "webpack5",
-    "mysql5.7",
-    "redis"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zhoujiahua/js-restful-api.git"
