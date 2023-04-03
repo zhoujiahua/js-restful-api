@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const swaggerSetup = require('./swagger');
+// const swaggerSetup = require('./swagger');
 const path = require('path');
 const app = express();
 
@@ -12,7 +12,7 @@ app.get('/api/info',  (req, res)=>{
 })
 
 // 设置Swagger
-swaggerSetup(app);
+// swaggerSetup(app);
 
 // ...其他代码...
 app.listen(8096, () => {
