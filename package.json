@@ -1,0 +1,63 @@
+{
+  "name": "js-restful-api",
+  "version": "1.0.0",
+  "description": "A RestFul API project using Node.js, Express, TypeORM, JWT, Socket.io, Webpack5, MySQL5.7, and Redis.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "lint": "eslint src/**/*.js",
+    "test": "mocha --require @babel/register --recursive './src/tests/**/*.test.js'"
+  },
+  "keywords": [
+    "restful",
+    "api",
+    "nodejs",
+    "express",
+    "typeorm",
+    "jwt",
+    "socket.io",
+    "webpack5",
+    "mysql5.7",
+    "redis"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhoujiahua/js-restful-api.git"
+  },
+  "author": "Jerry Zhou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhoujiahua/js-restful-api/issues"
+  },
+  "homepage": "https://github.com/zhoujiahua/js-restful-api#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mysql": "^2.18.1",
+    "redis": "^4.6.5",
+    "reflect-metadata": "^0.1.13",
+    "socket.io": "^4.6.1",
+    "swagger-ui-express": "^4.6.2",
+    "typeorm": "^0.3.12",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "@babel/register": "^7.21.0",
+    "babel-loader": "^9.1.2",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "chai": "^4.3.7",
+    "eslint": "^8.37.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.7",
+    "sinon": "^15.0.3",
+    "webpack": "^5.77.0",
+    "webpack-cli": "^5.0.1"
+  }
+}

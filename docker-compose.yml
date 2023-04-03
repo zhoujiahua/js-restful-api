@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+  db:
+    image: "mysql:5.7"
+    environment:
+      MYSQL_ROOT_PASSWORD: "7WjdL8AsrsCPWRea"
+      MYSQL_DATABASE: "restful"
+      MYSQL_USER: "restful"
+      MYSQL_PASSWORD: "7WjdL8AsrsCPWRea"
+    volumes:
+      - "db-data:/var/lib/mysql"
+    ports:
+      - "3306:3306"
+  redis:
+    image: "redis:6.2-alpine"
+    ports:
+      - "6379:6379"
+
+volumes:
+  db-data:
