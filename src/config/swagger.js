@@ -12,6 +12,6 @@ const apiDocsPath = isDev
 
 const swaggerDocument = YAML.load(apiDocsPath);
 
-module.exports = (app) => {
+module.exports = app => {
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 };
