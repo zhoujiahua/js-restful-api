@@ -47,10 +47,15 @@ jobs:
       run: npm run build
 
     - name: Deploy to server
-      run: |
-        echo "${{ secrets.DEPLOY_KEY }}" > deploy_key.pem
-        chmod 600 deploy_key.pem
-        rsync -avz --delete --exclude 'node_modules' -e 'ssh -i deploy_key.pem -o StrictHostKeyChecking=no' ./dist/ root@49.232.129.64:/www/wwwroot/restful/
-        ssh -i deploy_key.pem -o StrictHostKeyChecking=no root@49.232.129.64 'cd /www/wwwroot/restful/ && npm ci --production && pm2 restart rsf'
+      uses: appleboy/ssh-action@v0.1.8
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd /www/wwwroot/restful/
+          rsync -avz --delete --exclude 'node_modules' ./dist/ ./
+          pm2 reload rsf
       env:
-        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}

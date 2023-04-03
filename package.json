@@ -4,11 +4,11 @@
   "description": "A RestFul API project using Node.js, Express, TypeORM, JWT, Socket.io, Webpack5, MySQL5.7, and Redis.",
   "main": "src/app.js",
   "scripts": {
-    "start": "node src/app.js",
-    "dev": "nodemon src/app.js",
     "lint": "eslint src/**/*.js",
-    "build": "webpack --mode production",
-    "test": "mocha --require @babel/register --recursive './src/tests/**/*.test.js'"
+    "start": "cross-env NODE_ENV=production node src/app.js",
+    "dev": "cross-env NODE_ENV=development nodemon src/app.js",
+    "build": "cross-env NODE_ENV=production webpack --mode production",
+    "test": "cross-env NODE_ENV=development mocha --require @babel/register --recursive './src/tests/**/*.test.js'"
   },
   "keywords": [
     "restful",
@@ -51,6 +51,8 @@
     "babel-loader": "^9.1.2",
     "babel-plugin-module-resolver": "^5.0.0",
     "chai": "^4.3.7",
+    "copy-webpack-plugin": "^11.0.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
