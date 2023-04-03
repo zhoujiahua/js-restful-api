@@ -9,7 +9,6 @@ const swaggerSetup = require('./swagger');
 swaggerSetup(app);
 
 // ...其他代码...
-
-app.listen(3000, () => {
-  console.log('Server listening on port 3000');
+app.listen(8096, () => {
+  console.log('Server listening on port 8096');
 });
