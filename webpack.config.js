@@ -39,7 +39,10 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        { from: './package.json', to: './' },
+        {
+          from: path.resolve(__dirname, 'package.json'), // 源文件路径
+          to: path.resolve(__dirname, 'dist'), // 目标文件夹路径
+        },
         {
           from: path.resolve(__dirname, 'src/public'), // 源文件夹路径
           to: path.resolve(__dirname, 'dist/public'), // 目标文件夹路径

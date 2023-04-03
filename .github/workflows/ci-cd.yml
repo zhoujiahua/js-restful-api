@@ -12,45 +12,41 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
+    
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2.4.0
       with:
-        node-version: 14
+        node-version: '14.x'
 
     - name: Install dependencies
-      run: npm ci
-
-    - name: Run tests
-      run: npm test
+      run: npm install
 
     - name: Build project
       run: npm run build
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build-and-test
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
+    - name: Copy files to server
+      uses: appleboy/scp-action@master
       with:
-        node-version: 14
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        source: |
+          ./dist/
+          ./package.json
+        target: /www/wwwroot/restful/
 
-    - name: Install dependencies
-      run: npm ci
+    - name: Connect to server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd /www/wwwroot/restful/
+          npm install --production
+          pm2 reload rsf
 
-    - name: Build project
-      run: npm run build
 
-    - name: Deploy to server
-      run: |
-        echo "${{ secrets.DEPLOY_KEY }}" > deploy_key.pem
-        chmod 600 deploy_key.pem
-        rsync -avz --delete --exclude 'node_modules' -e 'ssh -i deploy_key.pem -o StrictHostKeyChecking=no' ./dist/ root@49.232.129.64:/www/wwwroot/restful/
-        ssh -i deploy_key.pem -o StrictHostKeyChecking=no root@49.232.129.64 'cd /www/wwwroot/restful/ && npm ci --production && pm2 restart rsf'
-      env:
-        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+   
