@@ -5,7 +5,7 @@
   "main": "src/app.js",
   "sideEffects": false,
   "scripts": {
-    "start": "node .app.js",
+    "start": "pm2 reload rsf",
     "lint": "eslint src/**/*.js",
     "dev": "cross-env NODE_ENV=development nodemon src/app.js",
     "build": "cross-env NODE_ENV=production webpack --mode production",
