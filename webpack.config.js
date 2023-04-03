@@ -40,8 +40,8 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, 'src/api-docs'), // 源文件夹路径
-          to: path.resolve(__dirname, 'dist/api-docs'), // 目标文件夹路径
+          from: path.resolve(__dirname, 'src/'), // 源文件夹路径
+          to: path.resolve(__dirname, 'dist/'), // 目标文件夹路径
         },
       ],
     }),
