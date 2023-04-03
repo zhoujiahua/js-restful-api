@@ -1,9 +1,15 @@
 require('dotenv').config();
 const express = require('express');
-const app = express();
 const swaggerSetup = require('./swagger');
+const path = require('path');
+const app = express();
 
-// ...其他代码...
+// 静态资源
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/api/info',  (req, res)=>{
+  return res.json({'name':'jerry'});
+})
 
 // 设置Swagger
 swaggerSetup(app);

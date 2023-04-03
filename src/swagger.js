@@ -8,7 +8,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 const apiDocsPath = isDev
   ? path.join(__dirname, 'api-docs', 'swagger.yaml')
-  : path.join(__dirname, '..', 'api-docs', 'swagger.yaml');
+  : path.join(__dirname, '..', 'dist/api-docs', 'swagger.yaml');
 
 const swaggerDocument = YAML.load(apiDocsPath);
 
