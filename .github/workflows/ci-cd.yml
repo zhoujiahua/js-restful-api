@@ -47,11 +47,12 @@ jobs:
       run: npm run build
 
     - name: Deploy to server
-      uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@v0.1.8
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
         script: |
           cd /www/wwwroot/restfulapi/
           rsync -avz --delete --exclude 'node_modules' ./dist/ ./
