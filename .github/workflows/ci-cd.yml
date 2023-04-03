@@ -3,7 +3,7 @@ name: CI/CD
 on:
   push:
     branches:
-      - main
+      - master   # 修改为主分支名称
 
 jobs:
   build-and-test:
@@ -32,6 +32,12 @@ jobs:
     needs: build-and-test
 
     steps:
+    - name: Install ssh-agent
+      uses: webfactory/ssh-agent@v0.4.2
+
+    - name: Add SSH private key
+      run: echo "${{ secrets.DEPLOY_KEY }}" | ssh-add -
+
     - name: Checkout repository
       uses: actions/checkout@v2
 
@@ -48,8 +54,7 @@ jobs:
 
     - name: Deploy to server
       run: |
-        # Replace the following placeholders with your actual server details
-        rsync -avz --delete --exclude 'node_modules' ./dist/ user@yourserver.com:/path/to/your/project/
-        ssh user@yourserver.com 'cd /path/to/your/project/ && npm ci --production'
+        rsync -avz --delete --exclude 'node_modules' ./dist/ root@49.232.129.64:/www/wwwroot/restfulapi/   # 根据您的实际服务器路径进行修改
+        ssh root@49.232.129.64 'cd /www/wwwroot/restfulapi/ && pm2 reload rsf'   # 根据您的实际服务器路径和pm2进程名称进行修改
       env:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
